@@ -144,8 +144,17 @@
     position:absolute;
     left:16.55%; top:16.5%;
     width:66.9%; height:21%;
-    object-fit:contain;
-    object-position:center center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .badge .img-header img{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    display:block;
   }
 
   .badge .campo-label{
@@ -230,7 +239,17 @@
     position:absolute;
     left:8%; top:85.0%;
     width:84%; height:7.0%;
-    object-fit:contain;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .badge .img-footer img{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    display:block;
   }
 
   .badge .footer-divisor{
@@ -854,7 +873,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     if (!archivo) return;
     cargarImagenComoDataURL(archivo, function(dataUrl){
       IMG_HEADER = dataUrl;
-      document.querySelectorAll('#grid .img-header').forEach(function(img){ img.src = IMG_HEADER; });
+      document.querySelectorAll('#grid .img-header img').forEach(function(img){ img.src = IMG_HEADER; });
       var guardado = storageSet(LS_KEYS.header, dataUrl);
       statusImagenesEl.className = guardado ? '' : 'error';
       statusImagenesEl.textContent = guardado
@@ -868,7 +887,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     if (!archivo) return;
     cargarImagenComoDataURL(archivo, function(dataUrl){
       IMG_FOOTER = dataUrl;
-      document.querySelectorAll('#grid .img-footer').forEach(function(img){ img.src = IMG_FOOTER; });
+      document.querySelectorAll('#grid .img-footer img').forEach(function(img){ img.src = IMG_FOOTER; });
       var guardado = storageSet(LS_KEYS.footer, dataUrl);
       statusImagenesEl.className = guardado ? '' : 'error';
       statusImagenesEl.textContent = guardado
@@ -894,8 +913,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     IMG_HEADER = DEFAULT_IMG_HEADER;
     IMG_FOOTER = DEFAULT_IMG_FOOTER;
     aplicarFondo(DEFAULT_BG_FONDO.slice(4, -1));
-    document.querySelectorAll('#grid .img-header').forEach(function(img){ img.src = IMG_HEADER; });
-    document.querySelectorAll('#grid .img-footer').forEach(function(img){ img.src = IMG_FOOTER; });
+    document.querySelectorAll('#grid .img-header img').forEach(function(img){ img.src = IMG_HEADER; });
+    document.querySelectorAll('#grid .img-footer img').forEach(function(img){ img.src = IMG_FOOTER; });
     storageRemove(LS_KEYS.header);
     storageRemove(LS_KEYS.footer);
     storageRemove(LS_KEYS.fondo);
@@ -925,14 +944,14 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     var el = document.createElement('div');
     el.className = 'badge';
     el.innerHTML =
-      '<img class="img-header" src="' + IMG_HEADER + '" alt="">' +
+      '<div class="img-header"><img src="' + IMG_HEADER + '" alt=""></div>' +
       '<div class="taglist"></div>' +
       '<div class="tag-barra"></div>' +
       '<div class="campo-label nombre-label"><span>NOMBRE</span></div>' +
       '<div class="valor-bar nombre-bar"><span class="valor-texto nombre-valor"></span></div>' +
       '<div class="campo-label colegio-label"><span class="colegio-label-texto"></span></div>' +
       '<div class="valor-bar colegio-bar"><span class="valor-texto colegio-valor"></span></div>' +
-      '<img class="img-footer" src="' + IMG_FOOTER + '" alt="">' +
+      '<div class="img-footer"><img src="' + IMG_FOOTER + '" alt=""></div>' +
       '<div class="footer-divisor"></div>' +
       '<div class="pie-footer"></div>';
     el.querySelector('.colegio-label-texto').textContent = colegioLabelInput.value || '';
